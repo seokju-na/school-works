@@ -1,0 +1,59 @@
+<div class="Home">
+    <section>
+        <div class="Home__head">
+            <div class="Home__title">
+                <h1>오늘 수업시간표</h1>
+                <time>6/11 월</time>
+            </div>
+        </div>
+
+        <div class="Home__content">
+            <hak-course-time-table></hak-course-time-table>
+        </div>
+    </section>
+
+    <section>
+        <div class="Home__head">
+            <div class="Home__title">
+                <h1>공지사항</h1>
+            </div>
+            <a mat-flat-button [routerLink]="['/course/notices']">
+                <span>전체보기</span>
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </a>
+        </div>
+
+        <div *ngIf="loadingMyNotices" class="Home__shade">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <ul class="Home__list">
+            <li *ngFor="let notice of myNotices | async">
+                <hak-course-notice-item [notice]="notice"></hak-course-notice-item>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <div class="Home__head">
+            <div class="Home__title">
+                <h1>내 과제</h1>
+            </div>
+
+            <a mat-flat-button [routerLink]="['/course/assignments']">
+                <span>전체보기</span>
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </a>
+        </div>
+
+        <div *ngIf="loadingMyAssignments" class="Home__shade">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <ul class="Home__list">
+            <li *ngFor="let assignment of myAssignments | async">
+                <hak-course-assignment-item [assignment]="assignment"></hak-course-assignment-item>
+            </li>
+        </ul>
+    </section>
+</div>

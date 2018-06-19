@@ -1,0 +1,13 @@
+<div class="Assignments">
+    <h1 class="Assignments__title">내 과제</h1>
+
+    <div *ngIf="loading" class="Assignments__shade">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <ul class="Assignments__list">
+        <li *ngFor="let assignment of myAssignments | async">
+            <hak-course-assignment-item [assignment]="assignment"></hak-course-assignment-item>
+        </li>
+    </ul>
+</div>

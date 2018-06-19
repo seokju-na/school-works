@@ -1,0 +1,36 @@
+<div class="SignUp">
+    <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="SignUp__form">
+        <mat-form-field>
+            <input matInput formControlName="email" type="text" required placeholder="이메일">
+            <span matSuffix>@korea.ac.kr</span>
+            <mat-error *ngIf="signUpForm.get('email').invalid">
+                {{getEmailInputErrorMessage()}}
+            </mat-error>
+        </mat-form-field>
+
+        <div formGroupName="passwords">
+            <mat-form-field hintLabel="6자 이상 30자 이하의 비밀번호">
+                <input matInput formControlName="password" type="password" minlength="6" maxlength="30" required
+                       placeholder="비밀번호">
+                <mat-error *ngIf="signUpForm.get('passwords.password').invalid">
+                    {{getPasswordInputErrorMessage()}}
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [errorStateMatcher]="parentErrorStateMatcher" formControlName="passwordConfirm"
+                       type="password" minlength="6" maxlength="30" required placeholder="비밀번호 확인">
+                <mat-error *ngIf="signUpForm.get('passwords.passwordConfirm').invalid">
+                    {{getPasswordConfirmInputErrorMessage()}}
+                </mat-error>
+                <mat-error *ngIf="signUpForm.get('passwords').hasError('passwordNotMatched')">
+                    비밀번호가 일치하지 않습니다
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="SignUp__actions">
+            <button mat-raised-button color="primary" [disabled]="signUpForm.invalid">회원가입</button>
+        </div>
+    </form>
+</div>

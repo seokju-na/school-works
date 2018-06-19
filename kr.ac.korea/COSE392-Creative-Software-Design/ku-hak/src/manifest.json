@@ -1,0 +1,10 @@
+{
+    "name": "KU HAK",
+    "short_name": "KU HAK",
+    "theme_color": "#1976d2",
+    "background_color": "#fafafa",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "gcm_sender_id": "103953800507"
+}

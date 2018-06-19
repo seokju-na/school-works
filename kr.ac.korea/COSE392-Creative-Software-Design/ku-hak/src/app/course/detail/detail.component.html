@@ -1,0 +1,88 @@
+<div class="CourseDetail">
+    <header>
+        <a mat-button [routerLink]="['/course/list']">
+            <mat-icon>arrow_back</mat-icon>
+            <span>수업 목록으로 돌아가기</span>
+        </a>
+
+        <div class="CourseDetail__info">
+            <mat-chip-list ariaOrientation="horizontal" [selectable]="false"
+                           class="CourseDetail__chips">
+                <mat-chip *ngFor="let chip of classChips">{{chip}}</mat-chip>
+            </mat-chip-list>
+
+            <h1 class="CourseDetail__title">{{course.course.name}}</h1>
+            <h3 class="CourseDetail__subTitle">{{course.course.englishName}}</h3>
+
+            <div class="CourseDetail__description">
+                <div>
+                    {{course.course.number}} · {{course.course.professor.name}} 교수
+                </div>
+                <div>강의실 : {{course.course.location}}</div>
+            </div>
+
+            <div class="CourseDetail__actions">
+                <a mat-stroked-button
+                   class="CourseDetail__liveStreamingLink">
+                    <mat-icon>fiber_manual_record</mat-icon>
+                    <span>실시간 스트리밍 중</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <mat-tab-group>
+        <mat-tab label="공지사항">
+            <ng-template matTabContent>
+                <div class="CourseDetail__notices">
+                    <div *ngIf="noticesLoading" class="CourseDetail__shade">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    <ul>
+                        <li *ngFor="let notice of notices | async">
+                            <hak-course-notice-item [notice]="notice"></hak-course-notice-item>
+                        </li>
+                    </ul>
+                    <div *ngIf="noticesEmpty" class="CourseDetail__emptyState">
+                        공지사항이 없습니다.
+                    </div>
+                </div>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="과제">
+            <ng-template matTabContent>
+                <div class="CourseDetail__assignments">
+                    <div *ngIf="assignmentsLoading"
+                         class="CourseDetail__shade">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    <ul>
+                        <li *ngFor="let assignment of assignments | async">
+                            <hak-course-assignment-item [assignment]="assignment"></hak-course-assignment-item>
+                        </li>
+                    </ul>
+                    <div *ngIf="assignmentsEmpty" class="CourseDetail__emptyState">
+                        과제가 없습니다.
+                    </div>
+                </div>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="1:1 대화">
+            <ng-template matTabContent>
+                <hak-course-chat-room [course]="course.course" [user]="course.user"></hak-course-chat-room>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="성적">
+            <ng-template matTabContent>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="강의 계획표">
+            <ng-template matTabContent>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

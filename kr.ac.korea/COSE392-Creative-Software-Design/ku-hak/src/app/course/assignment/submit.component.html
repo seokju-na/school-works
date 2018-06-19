@@ -1,0 +1,118 @@
+<div class="AssignmentSubmit">
+    <header>
+        <mat-chip-list ariaOrientation="horizontal" [selectable]="false"
+                       class="AssignmentSubmit__chips">
+            <mat-chip>{{typeName}}</mat-chip>
+            <mat-chip [color]="statusColor" selected="true">{{statusName}}</mat-chip>
+        </mat-chip-list>
+
+        <h1 class="AssignmentSubmit__title">
+            {{assignment.assignment.name}}
+        </h1>
+        <div class="AssignmentSubmit__description">
+            <span>수업</span>
+            <a [routerLink]="['/course/detail', assignment.assignment.course.number]">
+                {{assignment.assignment.course.name}}
+            </a>
+        </div>
+        <div class="AssignmentSubmit__description">
+            <span>제출기한</span>
+            <time>{{assignment.assignment.dueDatetime | date:'medium'}}</time>
+        </div>
+    </header>
+
+    <section>
+        <mat-accordion [multi]="true">
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>과제 설명</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <p #content class="AssignmentSubmit__content"></p>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel *ngIf="!isExpired()">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>파일 첨부</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <mat-list class="AssignmentSubmit__files">
+                    <span mat-subheader>파일은 최대 5개까지 첨부가능합니다.</span>
+
+                    <mat-list-item *ngFor="let file of assignment.files; let i = index">
+                        <hak-file-uploader
+                            (uploaded)="uploadFile(i, $event)"
+                            (deleted)="deleteFile(i)"
+                            [fileRef]="file"
+                            [baseFilePath]="assignment.assignment.id"></hak-file-uploader>
+                    </mat-list-item>
+                </mat-list>
+
+                <button *ngIf="canAddFile()" mat-raised-button (click)="addFile()">
+                    <mat-icon>add</mat-icon>
+                    <span>파일 추가하기</span>
+                </button>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel *ngIf="isTypeTeam() && !isExpired()"
+                                 class="AssignmentSubmit__role">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>팀원 역할 설정</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <mat-list>
+                    <p mat-subheader>
+                        팀원 각자의 역할을 지정해주세요. 역할은 중복 설정이 가능하며 최대 10개 역할을 입력할 수 있습니다.
+                    </p>
+
+                    <mat-list-item *ngFor="let group of getRoleModifyControls(); let i = index"
+                                   class="AssignmentSubmit__roleItem">
+                        <span class="AssignmentSubmit__roleItemName">{{i + 1}}.</span>
+
+                        <div class="AssignmentSubmit__roleField">
+                            <mat-form-field>
+                                <mat-label>역할</mat-label>
+                                <input matInput type="text" [formControl]="group.get('role')" required
+                                       maxlength="50" placeholder="역할을 입력해주세요">
+                                <mat-error *ngIf="group.get('role').hasError('required')">
+                                    역할을 입력해주세요
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-select required [formControl]="group.get('user')">
+                                    <mat-option *ngFor="let option of userOptions" [value]="option.value">
+                                        {{option.displayValue}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-label>팀원</mat-label>
+                                <mat-error *ngIf="group.get('user').hasError('required')">
+                                    팀원을 선택해주세요
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <button mat-raised-button color="warn"
+                                (click)="removeRole(i)"
+                                class="AssignmentSubmit__removeRoleButton">
+                            <mat-icon aria-label="팀원 역할 삭제하기">clear</mat-icon>
+                            <span class="name">삭제하기</span>
+                        </button>
+
+                        <mat-divider [inset]="true"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+
+                <button *ngIf="canAddRole()" mat-raised-button (click)="addRole()"
+                        class="AssignmentSubmit__addRoleButton">
+                    <mat-icon>add</mat-icon>
+                    <span>역할 추가하기</span>
+                </button>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </section>
+
+    <div *ngIf="!isExpired()" class="AssignmentSubmit__submit">
+        <button mat-raised-button color="primary" (click)="submit()">저장하기</button>
+    </div>
+</div>

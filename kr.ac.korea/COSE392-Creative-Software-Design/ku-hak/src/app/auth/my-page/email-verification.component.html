@@ -1,0 +1,20 @@
+<div class="EmailVerification">
+    <div *ngIf="loading" class="EmailVerification__loading">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="!loading && errorCaught === 'noActionCode'" class="EmailVerification__failByNoActionCode">
+        <p>유효하지 않은 요청입니다 :(</p>
+        <a mat-raised-button [routerLink]="['/']">홈으로 돌아가기</a>
+    </div>
+
+    <div *ngIf="!loading && errorCaught === 'invalidCode'" class="EmailVerification__failByInvalidCode">
+        <p>인증 코드가 만료되었습니다. 다시 시도해주세요.</p>
+        <a mat-raised-button [routerLink]="['/auth/my-page']">마이페이지로 돌아가기</a>
+    </div>
+
+    <div *ngIf="!loading && !errorCaught" class="EmailVerification__success">
+        <p>이메일 인증이 완료되었습니다 :)</p>
+        <a mat-raised-button [routerLink]="['/auth/my-page']">마이페이지로 돌아가기</a>
+    </div>
+</div>

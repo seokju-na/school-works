@@ -1,0 +1,15 @@
+<mat-card class="NoticeItem">
+    <mat-card-header>
+        <mat-card-title>{{notice.title}}</mat-card-title>
+        <mat-card-subtitle>
+            <time class="NoticeItem__writtenAt">{{notice.writtenDatetime | date:'medium'}}</time>
+            <a [routerLink]="['/course/detail', notice.course.number]"
+               class="NoticeItem__course">
+                {{notice.course.name}}
+            </a>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p #content class="NoticeItem__content"></p>
+    </mat-card-content>
+</mat-card>

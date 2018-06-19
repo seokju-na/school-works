@@ -1,0 +1,17 @@
+<div matTooltip message="클릭하여 프로필 사진 변경"
+     [matTooltipShowDelay]="500"
+     class="AvatarUploader">
+
+    <label [attr.for]="id" class="AvatarUploader__inner">
+        <span *ngIf="avatarImageUrl | async as url" class="AvatarUploader__avatar">
+            <img [src]="url" alt="프로필 이미지">
+        </span>
+        <span class="AvatarUploader__placeholder"></span>
+    </label>
+
+    <div class="AvatarUploader__editDecorator">
+        <mat-icon>create</mat-icon>
+    </div>
+
+    <input [id]="id" (change)="uploadImage($event)" type="file" accept=".png, .jpg, .jpeg">
+</div>

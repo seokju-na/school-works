@@ -1,0 +1,21 @@
+<div class="Login">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="Login__form">
+        <mat-form-field>
+            <input id="emailInput" matInput formControlName="email" type="text" placeholder="이메일">
+            <span matSuffix>@korea.ac.kr</span>
+            <mat-error *ngIf="loginForm.get('email').invalid">이메일을 입력해주세요</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input id="passwordInput" matInput formControlName="password" type="password" placeholder="비밀번호">
+            <mat-error *ngIf="loginForm.get('password').invalid">비밀번호를 입력해주세요</mat-error>
+        </mat-form-field>
+
+        <div class="Login__actions">
+            <button mat-raised-button color="primary" [disabled]="loginForm.invalid">로그인</button>
+            <a mat-button color="primary" [routerLink]="['/auth/sign-up']" queryParamsHandling="preserve">
+                또는 회원가입
+            </a>
+        </div>
+    </form>
+</div>

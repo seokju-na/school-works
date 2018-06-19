@@ -1,0 +1,13 @@
+<div class="CourseList">
+    <h1 class="CourseList__title">내 수업</h1>
+
+    <div *ngIf="loading" class="CourseList__shade">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <ul class="CourseList__list">
+        <li *ngFor="let course of myCourses | async">
+            <hak-course-item [course]="course"></hak-course-item>
+        </li>
+    </ul>
+</div>

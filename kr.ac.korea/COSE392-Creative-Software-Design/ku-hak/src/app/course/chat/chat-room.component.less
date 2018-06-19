@@ -1,0 +1,109 @@
+.ChatRoom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        height: 44px;
+        border-bottom: 1px solid #E0E0E0;
+
+        > h1 {
+            flex: 1;
+            margin: 0;
+            padding: 0 12px;
+        }
+
+        > button {
+            mat-icon {
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+                margin-bottom: 4px;
+            }
+        }
+    }
+
+    &__students {
+        flex: 1;
+        width: 100%;
+        overflow-y: auto;
+        background-color: #fff;
+    }
+
+    &__room {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__chats {
+        flex: 1;
+        display: block;
+        margin: 0;
+        padding: 10px 20px;
+        min-height: 1px;
+        overflow-y: auto;
+    }
+
+    &__chat {
+        display: block;
+        margin-top: 16px;
+        list-style: none;
+    }
+
+    &__messenger {
+        display: flex;
+        padding: 8px 6px;
+        background-color: #fff;
+        border-top: 1px solid #E0E0E0;
+
+        mat-form-field {
+            flex: 1;
+            padding: 0 10px;
+        }
+
+        button {}
+    }
+
+    &--expanded {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: calc(~"100vh - 54px");
+        background-color: #fafafa;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        z-index: 5;
+    }
+}
+
+
+.Chat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+
+    time {
+        display: block;
+        color: #616161;
+    }
+
+    &__message {
+        padding: 10px 12px;
+        border-radius: 3px;
+        background-color: #CFD8DC;
+    }
+
+    &--mine {
+        align-items: flex-end;
+
+        .Chat__message {
+            background-color: #C5CAE9;
+        }
+    }
+}

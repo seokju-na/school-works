@@ -1,0 +1,19 @@
+<mat-card class="CourseItem">
+    <mat-chip-list ariaOrientation="horizontal" [selectable]="false"
+                   class="CourseItem__chips">
+        <mat-chip *ngFor="let chip of classChips">{{chip}}</mat-chip>
+    </mat-chip-list>
+
+    <mat-card-header>
+        <mat-card-title class="CourseItem__title">{{course.course.name}}</mat-card-title>
+        <mat-card-subtitle>
+            <div>
+                {{course.course.number}} · {{course.course.professor.name}} 교수
+            </div>
+            <div>강의실 : {{course.course.location}}</div>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+        <a mat-button [routerLink]="['/course/detail', course.course.number]">자세히보기</a>
+    </mat-card-actions>
+</mat-card>

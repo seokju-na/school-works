@@ -1,0 +1,43 @@
+<div class="MyPage">
+    <mat-card class="MyPage__profile">
+        <mat-card-title>프로필 정보 수정</mat-card-title>
+
+        <div class="MyPage__avatar">
+            <hak-auth-avatar-uploader
+                [avatarPath]="userMetadata.avatarPath"
+                (updated)="updateAvatar($event)"></hak-auth-avatar-uploader>
+        </div>
+
+        <form [formGroup]="profileUpdateForm" (ngSubmit)="updateProfile()" class="MyPage__profileForm">
+            <mat-form-field>
+                <mat-label>이름</mat-label>
+                <input matInput formControlName="name" placeholder="이름을 입력해주세요">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>학과</mat-label>
+                <input matInput formControlName="department" placeholder="학과를 입력해주세요">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>학번</mat-label>
+                <input matInput formControlName="studentNumber" type="tel" placeholder="학번을 입력해주세요">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary">저장하기</button>
+        </form>
+    </mat-card>
+
+    <mat-card class="MyPage__emailCert">
+        <mat-card-title>이메일 인증</mat-card-title>
+        <mat-card-content>
+            <label class="MyPage__email">
+                {{user.email}}
+            </label>
+
+            <button mat-raised-button color="primary" (click)="verifyEmail()" [disabled]="user.emailVerified">
+                {{user.emailVerified ? '이메일 인증 완료' : '이메일 인증하기'}}
+            </button>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,23 @@
+<div #shell class="App">
+    <div *ngIf="showProgressBar" class="App__globalProgressBar">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+
+    <mat-sidenav-container class="App__container">
+        <mat-sidenav mode="over">
+            <hak-sidenav></hak-sidenav>
+        </mat-sidenav>
+
+        <mat-sidenav-content class="App__content">
+            <header *ngIf="routeData | async as data"
+                    class="App__header">
+                <ng-container [ngSwitch]="data?.headerLayout">
+                    <hak-nav-header *ngSwitchCase="HEADER_NAV"
+                                    [headerTitle]="data?.headerTitle"></hak-nav-header>
+                    <hak-header *ngSwitchDefault></hak-header>
+                </ng-container>
+            </header>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

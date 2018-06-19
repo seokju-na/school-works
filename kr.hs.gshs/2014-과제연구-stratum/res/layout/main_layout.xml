@@ -1,0 +1,149 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DCDCDC"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/linear_main_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <ImageButton
+            android:id="@+id/btn_main_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="mainOnClick"
+            android:src="@drawable/ic_action_location_searching" />
+
+        <ImageButton
+            android:id="@+id/btn_main_compass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="mainOnClick"
+            android:src="@drawable/ic_compass" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom|right"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/btn_main_newmap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:background="#DCDCDC"
+                android:onClick="mainOnClick"
+                android:src="@drawable/ic_action_edit" />
+
+            <ImageButton
+                android:id="@+id/btn_main_savemap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:background="#DCDCDC"
+                android:onClick="mainOnClick"
+                android:src="@drawable/ic_action_save" />
+
+            <ImageButton
+                android:id="@+id/btn_main_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#DCDCDC"
+                android:onClick="mainOnClick"
+                android:src="@drawable/ic_action_about" />
+        </LinearLayout>
+    </LinearLayout>
+    
+    
+    
+    
+    
+    <ImageButton
+        android:id="@+id/btn_main_drawmap"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="mainOnClick"
+        android:src="@drawable/ic_action_map" />
+    
+    
+    
+    
+    <LinearLayout
+        android:id="@+id/linear_main_bottom"
+        android:layout_above="@id/btn_main_drawmap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txt_main_strike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주향 : " />
+
+            <TextView
+                android:id="@+id/txt_main_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="위치 : " />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txt_main_pitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="경사 : " />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linear_main_bottom"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/linear_main_top"
+        >
+
+        <ImageView
+            android:id="@+id/img_main_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/map" />
+
+        <informatica.infostratum.MapCanvas
+            android:id="@+id/our_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    
+
+    
+
+</RelativeLayout>

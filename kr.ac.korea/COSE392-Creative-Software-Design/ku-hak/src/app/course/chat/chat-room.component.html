@@ -1,0 +1,44 @@
+<div [class.ChatRoom--expanded]="expanded" class="ChatRoom">
+    <div class="ChatRoom__header">
+        <button *ngIf="step === 'chat' && isProfessor" mat-icon-button (click)="backToStudentSelect()">
+            <mat-icon>keyboard_backspace</mat-icon>
+        </button>
+        <h1 class="mat-body-1">{{step === 'studentSelect' ? '학생 선택' : title}}</h1>
+        <button mat-icon-button (click)="toggleExpanded()">
+            <mat-icon *ngIf="expanded">keyboard_arrow_up</mat-icon>
+            <mat-icon *ngIf="!expanded">keyboard_arrow_down</mat-icon>
+        </button>
+    </div>
+
+    <div *ngIf="step === 'studentSelect'" class="ChatRoom__students">
+        <mat-list>
+            <mat-list-item *ngFor="let student of students | async">
+                <button mat-button (click)="openStudentChatRoom(student)">
+                    {{student.name}}
+                </button>
+                <mat-divider [inset]="true"></mat-divider>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div *ngIf="step === 'chat'" class="ChatRoom__room">
+        <ul *ngIf="chats | async as chatList" #chatListEl class="ChatRoom__chats">
+            <li *ngFor="let chat of chatList" class="ChatRoom__chat">
+                <div [class.Chat--mine]="isMyChat(chat)"
+                     class="Chat Chat--mine">
+                    <time class="mat-caption">{{chat.createdDatetime | date:'h:mm a'}}</time>
+                    <div class="Chat__message mat-body-1 mat-elevation-z0" [innerHTML]="getParseMessage(chat)"></div>
+                </div>
+            </li>
+        </ul>
+
+        <form [formGroup]="messageForm" (ngSubmit)="makeChat()" class="ChatRoom__messenger">
+            <mat-form-field>
+                <textarea matTextareaAutosize matInput #textarea maxlength="200"
+                          formControlName="message"></textarea>
+                <mat-hint align="end">{{textarea.value?.length || 0}}/200</mat-hint>
+            </mat-form-field>
+            <button mat-raised-button color="primary" [disabled]="emptyMessage()">전송</button>
+        </form>
+    </div>
+</div>

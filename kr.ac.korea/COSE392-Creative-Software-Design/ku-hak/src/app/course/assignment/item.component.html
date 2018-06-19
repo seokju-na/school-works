@@ -1,0 +1,33 @@
+<mat-card class="AssignmentItem">
+    <mat-chip-list ariaOrientation="horizontal" [selectable]="false"
+                   class="AssignmentItem__chips">
+        <mat-chip>{{typeName}}</mat-chip>
+        <mat-chip [color]="statusColor" selected="true">{{statusName}}</mat-chip>
+    </mat-chip-list>
+
+    <mat-card-header>
+        <mat-card-title class="AssignmentItem__title">
+            {{assignment.assignment.name}}
+        </mat-card-title>
+
+        <mat-card-subtitle>
+            <time class="AssignmentItem__due">
+                {{assignment.assignment.dueDatetime | date:'medium'}} 마감
+            </time>
+            <a [routerLink]="['/course/detail', assignment.assignment.course.number]"
+               class="AssignmentItem__course">
+                {{assignment.assignment.course.name}}
+            </a>
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="AssignmentItem__info">
+        <p [innerHTML]="content"></p>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <a mat-button [routerLink]="['/course/assignment', assignment.assignment.id]">
+            {{canSubmit() ? '제출하기' : '자세히보기'}}
+        </a>
+    </mat-card-actions>
+</mat-card>

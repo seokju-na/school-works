@@ -1,0 +1,117 @@
+.CourseDetail {
+    header {
+        padding: 10px 10px 14px 10px;
+        border-bottom: 1px solid #BDBDBD;
+        background-color: #fff;
+
+        .mat-button {
+            padding: 0 6px;
+            color: #424242;
+
+            mat-icon {
+                margin-right: 4px;
+                width: 20px;
+                height: 20px;
+                font-size: 20px;
+                color: #616161;
+            }
+        }
+    }
+
+    &__info {
+        padding: 20px 12px;
+    }
+
+    &__chips {
+        display: inline-flex;
+        padding: 0 0 16px 0;
+    }
+
+    &__title {
+        display: block;
+        font-size: 18px;
+        margin: 0 0 10px 0;
+    }
+
+    &__subTitle {
+        display: block;
+        font-size: 16px;
+        font-weight: normal;
+        color: rgba(0,0,0,.54);
+        margin: 0 0 28px 0;
+    }
+
+    &__description {
+        display: block;
+        font-size: 14px;
+        color: rgba(0,0,0,.54);
+
+        > *:first-child {
+            margin-bottom: 6px;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        padding-top: 30px;
+    }
+
+    &__liveStreamingLink {
+        color: #E53935;
+
+        mat-icon {
+            margin-right: 4px;
+            width: 16px;
+            height: 16px;
+            font-size: 16px;
+        }
+    }
+
+    .mat-tab-header {
+        background-color: #fff;
+        border-bottom-color: #BDBDBD;
+    }
+
+    .mat-tab-label-active {
+        color: #3F51B5;
+    }
+
+    .mat-tab-header-pagination {
+        z-index: 0;
+    }
+
+    &__shade {
+        display: flex;
+        justify-content: center;
+        padding: 20px 0;
+    }
+
+    &__emptyState {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 0;
+        color: #757575;
+    }
+
+    &__notices, &__assignments {
+        padding: 20px 16px;
+
+        > ul {
+            display: block;
+            margin: 0;
+            padding: 0;
+
+            > li {
+                display: block;
+                list-style: none;
+                margin-bottom: 15px;
+
+                &:last-child {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}

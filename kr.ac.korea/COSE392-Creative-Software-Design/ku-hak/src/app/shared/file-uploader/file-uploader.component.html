@@ -1,0 +1,29 @@
+<div class="FileUploader">
+    <label [attr.for]="inputId" class="FileUploader__selector">
+        <mat-icon>attachment</mat-icon>
+
+        <span *ngIf="!uploading" class="FileUploader__fileName">
+            {{isFileRefExists() ? fileRef.name : '파일을 선택해주세요'}}
+        </span>
+
+        <span *ngIf="uploading" class="FileUploader__progress">
+            {{uploadPercent | async}}%
+        </span>
+    </label>
+
+    <div *ngIf="!uploading"
+         class="FileUploader__actions">
+        <a *ngIf="isFileRefExists()"
+           [attr.href]="downloadUrl | async"
+           target="_blank"
+           download
+           mat-stroked-button>
+            <mat-icon aria-label="파일 다운로드">cloud_download</mat-icon>
+        </a>
+        <button *ngIf="!disabled" (click)="deleteFile()" mat-stroked-button>
+            <mat-icon aria-label="파일 삭제">clear</mat-icon>
+        </button>
+    </div>
+
+    <input [id]="inputId" type="file" (change)="uploadFile($event)" [disabled]="disabled">
+</div>

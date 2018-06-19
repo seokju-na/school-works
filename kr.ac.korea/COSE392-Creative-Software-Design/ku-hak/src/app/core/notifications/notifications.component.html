@@ -1,0 +1,18 @@
+<div class="Notifications">
+    <mat-nav-list>
+        <h3 mat-subheader>알림</h3>
+        <mat-list-item *ngFor="let notification of notifications"
+                       (click)="clickNotification(notification)"
+                       [class.Notifications__item--readed]="notification.readed"
+                       class="Notifications__item">
+            <p matLine class="mat-body-1">{{notification.content}}</p>
+            <time matLine class="mat-caption">{{notification.createdDatetime | date:'medium'}}</time>
+            <mat-divider [inset]="true"></mat-divider>
+        </mat-list-item>
+
+        <div *ngIf="!notifications || notifications?.length === 0"
+             class="Notifications__emptyState mat-body-1">
+            알림이 없습니다
+        </div>
+    </mat-nav-list>
+</div>

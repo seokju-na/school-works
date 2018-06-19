@@ -1,0 +1,13 @@
+<div class="Notices">
+    <h1 class="Notices__title">전체 공지사항</h1>
+
+    <div *ngIf="loading" class="Notices__shade">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <ul class="Notices__list">
+        <li *ngFor="let notice of myNotices | async">
+            <hak-course-notice-item [notice]="notice"></hak-course-notice-item>
+        </li>
+    </ul>
+</div>

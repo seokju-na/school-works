@@ -1,0 +1,56 @@
+.FileUploader {
+    position: relative;
+    display: flex;
+    max-width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+
+    &__selector {
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    &__fileName, &__progress {
+        flex: 1;
+        min-width: 1px;
+        display: inline-block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-size: 14px;
+        padding: 0 10px;
+    }
+
+    &__actions {
+        display: inline-flex;
+        align-items: center;
+
+        a, button {
+            margin: 0 2px;
+            padding: 0 8px;
+            line-height: 28px;
+            min-width: auto;
+            border-color: #E0E0E0;
+            color: #424242;
+
+            mat-icon {
+                width: 20px;
+                height: 20px;
+                font-size: 20px;
+            }
+        }
+    }
+
+    > input {
+        display: inline-block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: 0;
+        top: 0;
+        z-index: -9999;
+        visibility: hidden;
+    }
+}

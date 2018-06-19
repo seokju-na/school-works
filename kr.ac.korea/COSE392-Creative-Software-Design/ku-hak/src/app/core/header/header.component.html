@@ -1,0 +1,32 @@
+<div class="Header">
+    <button mat-icon-button (click)="clickSidenavToggleButton()">
+        <mat-icon aria-label="Sidenav Toggle Button">menu</mat-icon>
+    </button>
+
+    <h1 class="Header__title">
+        <a [routerLink]="['/']">
+            <mat-icon aria-label="HAK Logo">school</mat-icon>
+        </a>
+    </h1>
+
+    <button *ngIf="user | async; else noUser"
+            mat-icon-button
+            [matBadge]="unreadNotificationCount | async"
+            matBadgeColor="warn"
+            matBadgeSize="small"
+            [matBadgeHidden]="(unreadNotificationCount | async) === 0 || initialLoading"
+            [disabled]="initialLoading"
+            (click)="toggleNotificationsWindow()">
+        <mat-icon aria-label="Notification Button">notifications_none</mat-icon>
+    </button>
+
+    <div *ngIf="user | async"
+         [class.Header__notifications--show]="showNotifications"
+         class="Header__notifications">
+        <hak-notifications [notifications]="notifications | async"></hak-notifications>
+    </div>
+
+    <ng-template #noUser>
+        <div class="Header__blank"></div>
+    </ng-template>
+</div>

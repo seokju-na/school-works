@@ -1,0 +1,56 @@
+<nav class="Sidenav">
+    <div *ngIf="user | async as userData; else needLogin"
+         class="Sidenav__account">
+        <div *ngIf="userMetadata | async as userMetadata"
+             class="Sidenav__profile">
+
+            <div class="Sidenav__user">
+                <div class="Sidenav__avatar">
+                    <div *ngIf="hasAvatar && (avatarImageUrl | async) as url">
+                        <img [src]="url" alt="프로필 이미지">
+                    </div>
+                    <div *ngIf="!hasAvatar" class="Sidenav__avatarPlaceholder"></div>
+                </div>
+
+                <div class="Sidenav__metadata">
+                    <h2 class="mat-h3">{{userMetadata.name}}</h2>
+                    <span class="mat-caption">{{userMetadata.department}}</span>
+                    <span class="mat-caption">{{userMetadata.studentNumber}}</span>
+                </div>
+            </div>
+
+            <div class="Sidenav__links">
+                <a mat-raised-button [routerLink]="['/auth/my-page']">
+                    <mat-icon>person_none</mat-icon>
+                    마이페이지
+                </a>
+
+                <a mat-raised-button href="http://portal.korea.ac.kr/">
+                    <mat-icon>public</mat-icon>
+                    포털 바로가기
+                </a>
+            </div>
+        </div>
+
+        <div class="Sidenav__services">
+            <mat-nav-list>
+                <a mat-list-item
+                   *ngFor="let service of serviceLinks"
+                   [routerLink]="[service.link]">
+                    {{service.name}}
+                </a>
+            </mat-nav-list>
+        </div>
+
+        <div class="Sidenav__logout">
+            <button mat-flat-button (click)="logout()">로그아웃</button>
+        </div>
+    </div>
+
+    <ng-template #needLogin>
+        <div class="Sidenav__needLogin">
+            <p class="mat-body-1">로그인이 필요합니다.</p>
+            <a mat-raised-button color="primary" [routerLink]="['/auth/login']">로그인</a>
+        </div>
+    </ng-template>
+</nav>

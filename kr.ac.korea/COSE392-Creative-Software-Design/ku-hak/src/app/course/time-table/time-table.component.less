@@ -1,0 +1,31 @@
+.TimeTable {
+    width: 100%;
+
+    &__shade {
+        display: flex;
+        justify-content: center;
+        padding: 20px 0;
+    }
+
+    > table {
+        width: 100%;
+        border: 1px solid #E0E0E0;
+        border-radius: 5px;
+
+        .mat-column-no {
+            width: 50px;
+        }
+
+        td.mat-cell:first-child,
+        td.mat-footer-cell:first-child,
+        th.mat-header-cell:first-child {
+            padding-left: 16px;
+        }
+
+        td.mat-cell:last-child,
+        td.mat-footer-cell:last-child,
+        th.mat-header-cell:last-child {
+            padding-right: 16px;
+        }
+    }
+}
